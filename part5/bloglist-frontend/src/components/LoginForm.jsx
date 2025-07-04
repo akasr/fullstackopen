@@ -34,6 +34,7 @@ const LoginForm = ({ setUser, setMessage }) => {
             <input
               type="text"
               value={username}
+              data-testid='username'
               onChange={({ target }) => setUsername(target.value)}
               required
             />
@@ -44,6 +45,7 @@ const LoginForm = ({ setUser, setMessage }) => {
             password
             <input
               type="password"
+              data-testid='password'
               value={password}
               onChange={({ target }) => setPassword(target.value)}
               required

@@ -23,6 +23,7 @@ const BlogForm = ({ setMessage, blogs, setBlogs, addBlog }) => {
           <input
             type="text"
             value={title}
+            data-testid="title"
             onChange={({ target }) => setTitle(target.value)}
             required
           />
@@ -32,6 +33,7 @@ const BlogForm = ({ setMessage, blogs, setBlogs, addBlog }) => {
           <input
             type="text"
             value={author}
+            data-testid="author"
             onChange={({ target }) => setAuthor(target.value)}
           />
         </div>
@@ -40,6 +42,7 @@ const BlogForm = ({ setMessage, blogs, setBlogs, addBlog }) => {
           <input
             type="text"
             value={url}
+            data-testid="url"
             onChange={({ target }) => setUrl(target.value)}
             required
           />

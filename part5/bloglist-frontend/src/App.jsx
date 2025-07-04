@@ -30,7 +30,9 @@ const App = () => {
   const createBlog = async (newBlog) => {
     blogFormRef.current.toggleVisibility()
     const returnedBlog = await blogService.create(newBlog)
-    setBlogs(blogs.concat(returnedBlog).sort((a, b) => b.likes - a.likes))
+    setBlogs(
+      blogs.concat({ ...returnedBlog, user }).sort((a, b) => b.likes - a.likes)
+    )
     setMessage(
       `a new blog ${returnedBlog.title} by ${returnedBlog.author} added`
     )
@@ -80,7 +82,13 @@ const App = () => {
 
           <div>
             {blogs.map((blog) => (
-              <Blog blog={blog} key={blog.id} incrementLikes={incrementLikes} deleteBlog={deleteBlog}/>
+              <Blog
+                blog={blog}
+                key={blog.id}
+                incrementLikes={incrementLikes}
+                deleteBlog={deleteBlog}
+                user={user}
+              />
             ))}
           </div>
         </>
