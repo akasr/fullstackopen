@@ -1,32 +1,37 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
+import { Divider } from '@mui/material'
+
 import Togglable from './Togglable'
 import BlogForm from './BlogForm'
 
 const Blogs = () => {
   const blogs = useSelector((store) => store.blogs)
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginTop: 5,
-    display: 'block'
-  }
+
   return (
     <>
       <Togglable buttonLabel={'new blog'}>
         <BlogForm />
       </Togglable>
 
-      <div>
+      <h2>Blogs</h2>
+      <List>
         {blogs.map((blog) => (
-          <Link style={blogStyle} to={`/blogs/${blog.id}`} key={blog.id}>
-            {blog.title}
-          </Link>
+          <>
+            <ListItem key={blog.id}>
+              <ListItemButton component={Link} to={`/blogs/${blog.id}`}>
+                <ListItemText primary={blog.title} />
+              </ListItemButton>
+            </ListItem>
+            <Divider component="li" />
+          </>
         ))}
-      </div>
+      </List>
     </>
   )
 }

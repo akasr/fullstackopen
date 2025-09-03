@@ -6,6 +6,8 @@ import notificationReducer from './reducers/notificationReducer'
 import blogReducer from './reducers/blogReducer'
 import formVisibilityReducer from './reducers/formVisibilityReducer'
 import usersReducer from './reducers/usersReducer'
+
+import { Container } from '@mui/material'
 import App from './App'
 
 const store = configureStore({
@@ -20,7 +22,9 @@ const store = configureStore({
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <Router>
-      <App />
+      <Container>
+        <App />
+      </Container>
     </Router>
   </Provider>,
 )

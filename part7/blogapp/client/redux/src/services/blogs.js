@@ -38,8 +38,13 @@ const update = async (blog) => {
   return response.data
 }
 
+const comment = async(id, comment) => {
+  const response = await api.put(`/${id}/comments`, { comment })
+  return response.data
+}
+
 const remove = async (id) => {
   await api.delete(`/${id}`)
 }
 
-export default { getAll, create, setToken, update, remove }
+export default { getAll, create, setToken, update, remove, comment }

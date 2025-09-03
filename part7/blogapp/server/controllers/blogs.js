@@ -1,4 +1,5 @@
-const blogRouter = require('express').Router()
+const express = require('express')
+const blogRouter = express.Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
@@ -35,7 +36,7 @@ blogRouter.delete('/:id', async (request, response) => {
     return response.status(404).json({ error: 'blog not found' })
   }
 
-  const user =  await User.findById(request.user)
+  const user = await User.findById(request.user)
   if (!user) {
     return response.status(404).json({ error: 'user not found' })
   }
@@ -61,6 +62,29 @@ blogRouter.put('/:id', async (request, response) => {
   )
 
   response.json(updatedBlog)
+})
+
+blogRouter.put('/:id/comments', express.json(), async (request, response) => {
+  const { comment } = request.body || {}
+  const commentText = typeof comment === 'string' ? comment.trim() : ''
+
+  if (!commentText) {
+    return response
+      .status(400)
+      .json({ error: 'comment must be a non-empty string' })
+  }
+
+  const updated = await Blog.findByIdAndUpdate(
+    request.params.id,
+    { $push: { comments: commentText } },
+    { new: true, runValidators: true }
+  )
+
+  if (!updated) {
+    return response.status(404).json({ error: 'blog not found' })
+  }
+
+  response.status(200).json(updated)
 })
 
 module.exports = blogRouter

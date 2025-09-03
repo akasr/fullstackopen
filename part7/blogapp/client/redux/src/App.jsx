@@ -13,6 +13,7 @@ import Blogs from './components/Blogs'
 import Users from './components/Users'
 import User from './components/User'
 import Blog from './components/Blog'
+import Navigation from './components/Navigation'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -53,13 +54,8 @@ const App = () => {
       {notification && <Error message={notification} />}
       {user ? (
         <>
-          <nav>
-            <Link style={padding} to="/">blogs</Link>
-            <Link style={padding} to="/users">users</Link>
-            {user.name} logged in <button onClick={handleLogout}>logout</button>
-          </nav>
-          <h1>blogs</h1>
-
+          <Navigation />
+          <h1>BlogApp</h1>
           <Routes>
             <Route path="/" element={<Blogs />} />
             <Route path="/users" element={<Users />} />

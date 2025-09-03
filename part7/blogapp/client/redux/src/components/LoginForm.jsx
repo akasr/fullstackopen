@@ -4,6 +4,10 @@ import { setNotification, clearNotification } from '../reducers/notificationRedu
 import loginService from '../services/login'
 import blogService from '../services/blogs'
 
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Box from '@mui/material/Box' // Add Box for layout
+
 const LoginForm = ({ setUser }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -29,36 +33,59 @@ const LoginForm = ({ setUser }) => {
   }
 
   return (
-    <>
-      <h1>log in to application</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>
-            username
-            <input
-              type="text"
-              value={username}
-              data-testid="username"
-              onChange={({ target }) => setUsername(target.value)}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            password
-            <input
-              type="password"
-              data-testid="password"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-              required
-            />
-          </label>
-        </div>
-        <button type="submit">login</button>
-      </form>
-    </>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          width: 350,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          p: 3,
+          boxShadow: 3,
+          borderRadius: 2,
+          bgcolor: 'background.paper',
+        }}
+      >
+        <h1>Sign In to BlogApp</h1>
+        <form onSubmit={handleLogin} style={{ width: '100%' }}>
+          <TextField
+            id="username"
+            label="Username"
+            value={username}
+            data-testid="username"
+            onChange={({ target }) => setUsername(target.value)}
+            fullWidth
+            sx={{ my: 2 }}
+          />
+          <TextField
+            type="password"
+            label="Password"
+            data-testid="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+            fullWidth
+            sx={{ my: 2 }}
+          />
+          <Button
+            variant="contained"
+            color="success"
+            type="submit"
+            size="large"
+            fullWidth
+            sx={{ my: 2 }}
+          >
+            Sign In
+          </Button>
+        </form>
+      </Box>
+    </Box>
   )
 }
 
